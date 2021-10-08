@@ -1,9 +1,10 @@
 const acme = require('acme-client');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const gandi = require('./gandi');
+const savecert = require('./saveccert');
 
 const CSR = readFileSync('./rec-la.csr', 'utf-8');
-const accountPrivateKey = readFileSync('./rec.la-key.pem', 'utf-8');;
+const accountPrivateKey = readFileSync('./docs/rec.la-key.pem', 'utf-8');;
 
 const autoOpts = {
   csr: CSR,
@@ -16,13 +17,14 @@ const autoOpts = {
 
 (async () => {
   const client = new acme.Client({
-    directoryUrl: acme.directory.letsencrypt.production,  // change to production when dev is OK
-    accountKey: await acme.forge.createPrivateKey()
+    directoryUrl: acme.directory.letsencrypt.production,  // change to production or staging when dev is OK
+    accountKey: await acme.forge.createPrivateKey() // generate an account key each time
   });
 
   console.log('START');
   const certificate = await client.auto(autoOpts);
-  writeFileSync('./rec.la-bundle.crt', certificate);
+  //const certificate = readFileSync('./rec.la-bundle.crt', 'utf-8');
+  savecert(certificate);
   console.log('DONE');
 })()
 
