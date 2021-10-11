@@ -1,10 +1,12 @@
 const acme = require('acme-client');
-const { readFileSync } = require('fs');
+const { read } = require('./files');
 const gandi = require('./gandi');
 const savecert = require('./saveccert');
+const pack = require('./pack');
 
-const CSR = readFileSync('./rec-la.csr', 'utf-8');
-const accountPrivateKey = readFileSync('./docs/rec.la-key.pem', 'utf-8');;
+const DOMAIN = 'rec.la';
+
+const CSR = read([DOMAIN + '.csr']); // could be self genreated with acme.forge
 
 const autoOpts = {
   csr: CSR,
@@ -23,15 +25,15 @@ const autoOpts = {
 
   console.log('START');
   const certificate = await client.auto(autoOpts);
-  //const certificate = readFileSync('./rec.la-bundle.crt', 'utf-8');
-  savecert(certificate);
+  //const certificate = read(['docs', DOMAIN + '-bundle.crt']);
+  savecert(DOMAIN, certificate);
+  await pack(DOMAIN);
   console.log('DONE');
 })()
 
 async function challengeCreateFn(authz, challenge, keyAuthorization) {
-  const dnsChallenge = challenge
-  console.log('****challengeCreateFn');
-  await gandi.update('rec.la', keyAuthorization);
+  console.log('****challengeCreateFn: ' + keyAuthorization);
+  await gandi.update(DOMAIN, keyAuthorization);
 }
 
 async function challengeRemoveFn(authz, challenge, keyAuthorization) {

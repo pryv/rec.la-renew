@@ -1,15 +1,40 @@
+# REC.LA RENEW
 
-# Setup 
+Tool to create wildcard *.rec.la SSL certificate with let's encrypt and GANDI. 
 
-Add your Gandi's API to a `secret.json`
+- output the certificates in `docs/` which are exposed on `https://pryv.github.io/rec-la-renew/`
+- certifcates will be downloaded by [https://github.com/pryv/rec-la](rec-la) package
+
+## Setup 
+
+You need to add your secret Gandi's API to a `secret.json`
 ```
 {"APIKEY": "Hwbb9f0fvdXTstQTiAT0PeKE"}
 ```
 
+## Run 
 
-# Helpers
+`node src/index.js` to generate new SSL certificates.
 
-## generate new CSR and key with:
+## Dev
+
+### CSR
+The tool will use `./rec.la.csr` for the request. This has been generated with the following OpenSSL command. 
+In further dev the CSR could be generated with 
+
+```
+const [certificateKey, certificateRequest] = await acme.forge.createCsr({
+    commonName: 'test.example.com'
+});
+```
+
+### Let's encrypt account & ACME-Client API
+
+Now an account cert is generataed for each request. This could be reviewed and a single account kept for all manipulations. [ACME-CLIENT](https://github.com/publishlab/node-acme-client) offers plenty of options to create let's encrypt account. See: [ACME-CLIENT API](https://github.com/publishlab/node-acme-client/blob/master/docs/client.md)
+
+### Helpers
+
+#### generate new CSR and key with:
 
 ```
 openssl req -new -newkey rsa:4096 -nodes \
@@ -17,7 +42,7 @@ openssl req -new -newkey rsa:4096 -nodes \
     -subj "/C=CH/ST=VD/L=Lausanne/O=Pryv/CN=*.rec.la"
 ```
 
-## Gandi API Key 
+#### Gandi API Key 
 - Get your own from security tab
 
 `set APIKEY=XXXXXXX`
