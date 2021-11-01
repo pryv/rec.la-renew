@@ -7,9 +7,11 @@ Tool to create wildcard *.rec.la SSL certificate with let's encrypt and GANDI.
 
 ## Setup 
 
+Note: We have a user on gandi, named `recla` with a Password in 1Password. 
+
 You need to add your secret Gandi's API to a `secret.json`
 ```
-{"APIKEY": "Hwbb9f0fvdXTstQTiAT0PeKE"}
+{"APIKEY": "....."}
 ```
 
 ## Run 
@@ -47,20 +49,35 @@ openssl req -new -newkey rsa:4096 -nodes \
 
 `set APIKEY=XXXXXXX`
 
+**IMPORTANT ABOUT SHARING_ID:** This is only needed for our own accounts.. recla accounts has another type of sharing that gives direct access with no sharing id.. 
+
 - Get "sharing_id" for Pryv: 
 `curl -H "Authorization: ApiKey ${APIKEY}" https://api.gandi.net/v5/organization/organizations`
 
-RES: `48e7a100-3ed9-11e7-a6ef-00163e6dc886`  
+RES: `48e7a100-3ed9-11e7-htzs-00163e6dc886`  
 
 - (Check) list domains
-`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains?sharing_id=48e7a100-3ed9-11e7-a6ef-00163e6dc886"`
+
+`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains`
+
+or 
+
+`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains?sharing_id=48e7a100-3ed9-11e7-htzs-00163e6dc886"`
 
 
 - LIST Rec.la entries 
 
-`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains/rec.la/records?sharing_id=48e7a100-3ed9-11e7-a6ef-00163e6dc886"`
+`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains/rec.la/records`
+
+or
+
+`curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains/rec.la/records?sharing_id=48e7a100-3ed9-11e7-htzs-00163e6dc886"`
 
 - UPDATE Entry;
 
-`curl -X PUT -H "Authorization: ApiKey ${APIKEY}" -H 'Content-Type: application/json' -d '{"rrset_ttl":300,"rrset_values":["\"pki\""]}' "https://api.gandi.net/v5/livedns/domains/rec.la/records/_acme-challenge/TXT?sharing_id=48e7a100-3ed9-11e7-a6ef-00163e6dc886"`
+`curl -X PUT -H "Authorization: ApiKey ${APIKEY}" -H 'Content-Type: application/json' -d '{"rrset_ttl":300,"rrset_values":["\"pki\""]}' "https://api.gandi.net/v5/livedns/domains/rec.la/records/_acme-challenge/TXT`
+
+or
+
+`curl -X PUT -H "Authorization: ApiKey ${APIKEY}" -H 'Content-Type: application/json' -d '{"rrset_ttl":300,"rrset_values":["\"pki\""]}' "https://api.gandi.net/v5/livedns/domains/rec.la/records/_acme-challenge/TXT?sharing_id=48e7a100-3ed9-11e7-htzs-00163e6dc886"`
 
