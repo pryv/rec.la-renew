@@ -5,6 +5,7 @@ const savecert = require('./saveccert');
 const pack = require('./pack');
 
 const DOMAIN = 'rec.la';
+const IS_PRODUCTION = process.env.IS_PRODUCTION || false; // set to true when going to production
 
 const CSR = read([DOMAIN + '.csr']); // could be self genreated with acme.forge
 
@@ -19,7 +20,7 @@ const autoOpts = {
 
 (async () => {
   const client = new acme.Client({
-    directoryUrl: acme.directory.letsencrypt.production,  // change to production or staging when dev is OK
+    directoryUrl: IS_PRODUCTION ? acme.directory.letsencrypt.production : acme.directory.letsencrypt.staging,  
     accountKey: await acme.forge.createPrivateKey() // generate an account key each time
   });
 

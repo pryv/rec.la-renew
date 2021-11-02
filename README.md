@@ -5,20 +5,17 @@ Tool to create wildcard *.rec.la SSL certificate with let's encrypt and GANDI.
 - output the certificates in `docs/` which are exposed on `https://pryv.github.io/rec-la-renew/`
 - certifcates will be downloaded by [https://github.com/pryv/rec-la](rec-la) package
 
-## Setup 
+## Usage
 
-Note: We have a user on gandi, named `recla` with a Password in 1Password. 
+### Setup
 
-You need to add your secret Gandi's API to a `secret.json`
-```
-{"APIKEY": "....."}
-```
+Fetch dependencies: `yarn`
 
-## Run 
+## Run
 
-`node src/index.js` to generate new SSL certificates.
+`GANDI_REC_LA_API_KEY=${KEY} yarn start` to generate new SSL certificates into `docs/`
 
-## Dev
+add `IS_PRODUCTION=true` to use Let's Encrypt's production API **which has a call limit!**
 
 ### CSR
 The tool will use `./rec.la.csr` for the request. This has been generated with the following OpenSSL command. 
