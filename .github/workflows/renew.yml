@@ -1,8 +1,6 @@
 name: Renew SSL certificate and publish it to www.rec.la
 
-on: 
-  push:
-    branches: '*'
+on: push
 
 jobs:
   build:
