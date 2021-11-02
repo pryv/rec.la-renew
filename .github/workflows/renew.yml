@@ -1,4 +1,4 @@
-name: SSL renewal release
+name: Renew SSL certificate and publish it to www.rec.la
 
 on: 
   push:
