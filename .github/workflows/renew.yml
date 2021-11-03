@@ -2,8 +2,8 @@ name: Renew SSL certificate and publish it to www.rec.la
 
 on: 
   schedule:
-    # each Wednesday at 10:30
-    - cron:  "30 10 * * 2"
+    # each Thursday at 10:30
+    - cron:  "30 10 * * 4"
 
 jobs:
   build:
