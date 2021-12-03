@@ -51,7 +51,7 @@ jobs:
         # Name of the branch to use, if different from the one that triggered the workflow
         # Default: the branch that triggered the workflow (from GITHUB_REF)
         #ref: 'master'
-      #env:
+      env:
         # This is necessary in order to push a commit to the repo
-        #GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
+        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
 
