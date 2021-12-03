@@ -24,7 +24,7 @@ jobs:
       run: yarn
 
     - name: Generate new certificate
-      run: IS_PRODUCTION=true GANDI_REC_LA_API_KEY=${{ secrets.GANDI_REC_LA_API_KEY }} yarn start
+      run: IS_PRODUCTION=false GANDI_REC_LA_API_KEY=${{ secrets.GANDI_REC_LA_API_KEY }} yarn start
 
     # there is one private package (lib-reporting) used as npm package, so we need 
     # to authenticate
