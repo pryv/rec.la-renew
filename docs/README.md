@@ -25,4 +25,4 @@ From here you can download rec-la SSL certificates.
 - [rec.la-bundle.crt](rec.la-bundle.crt) : Bundle of key + ca  
 - [pack.json](pack.json) : All this packed in a json file  
 
-This is provided, by [Pryv](https://www.pryv.com) -  Data & Privacy Managed
+This is provided by [Pryv](https://www.pryv.com) -  Data & Privacy Managed
