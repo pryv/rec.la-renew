@@ -17,12 +17,12 @@ This will enable any developer to benefit from a loopback signed Certificate.
 
 From here you can download rec-la SSL certificates.
 
-**Files:** 
+#### Files:
 
-- [rec.la-cert.crt](rec.la-cert.crt) : The certificate
-- [rec.la-key.pem](rec.la-key.pem) : The key
-- [rec.la-ca.crt](rec.la-ca.crt) : Certificate of the authority
-- [rec.la-bundle.crt](rec.la-bundle.crt) : Bundle of key + ca
-- [pack.json](pack.json) : All this packed in a json file 
+- [rec.la-cert.crt](rec.la-cert.crt) : The certificate  
+- [rec.la-key.pem](rec.la-key.pem) : The key  
+- [rec.la-ca.crt](rec.la-ca.crt) : Certificate of the authority  
+- [rec.la-bundle.crt](rec.la-bundle.crt) : Bundle of key + ca  
+- [pack.json](pack.json) : All this packed in a json file  
 
-This is provide, by [Pryv](https://www.pryv.com) -  Data & Privacy Managed
+This is provided, by [Pryv](https://www.pryv.com) -  Data & Privacy Managed
