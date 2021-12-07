@@ -1,9 +1,10 @@
-# REC.LA RENEW
+# rec.la renew
 
-Tool to create wildcard *.rec.la SSL certificate with let's encrypt and GANDI. 
+Tool to create wildcard *.rec.la SSL certificate with Let's Encrypt and Gandi.
 
-- output the certificates in `docs/` which are exposed on `https://pryv.github.io/rec-la-renew/`
-- certifcates will be downloaded by [https://github.com/pryv/rec-la](rec-la) package
+- Outputs the certificates to `docs/`, published on `https://pryv.github.io/rec.la-renew/`
+- Certificates are downloaded by the [rec.la](https://github.com/pryv/rec.la) package
+
 
 ## Usage
 
@@ -11,15 +12,15 @@ Tool to create wildcard *.rec.la SSL certificate with let's encrypt and GANDI.
 
 Fetch dependencies: `yarn`
 
-## Run
+### Run
 
 `GANDI_REC_LA_API_KEY=${KEY} yarn start` to generate new SSL certificates into `docs/`
 
 add `IS_PRODUCTION=true` to use Let's Encrypt's production API **which has a call limit!**
 
 ### CSR
-The tool will use `./rec.la.csr` for the request. This has been generated with the following OpenSSL command. 
-In further dev the CSR could be generated with 
+The tool will use `./rec.la.csr` for the request. This has been generated with the following OpenSSL command.
+In further dev the CSR could be generated with
 
 ```
 const [certificateKey, certificateRequest] = await acme.forge.createCsr({
@@ -33,7 +34,7 @@ Now an account cert is generataed for each request. This could be reviewed and a
 
 ### Helpers
 
-#### generate new CSR and key with:
+#### Generate new CSR and key with:
 
 ```
 openssl req -new -newkey rsa:4096 -nodes \
@@ -41,28 +42,28 @@ openssl req -new -newkey rsa:4096 -nodes \
     -subj "/C=CH/ST=VD/L=Lausanne/O=Pryv/CN=*.rec.la"
 ```
 
-#### Gandi API Key 
+#### Gandi API Key
 - Get your own from security tab
 
 `set APIKEY=XXXXXXX`
 
-**IMPORTANT ABOUT SHARING_ID:** This is only needed for our own accounts.. recla accounts has another type of sharing that gives direct access with no sharing id.. 
+**IMPORTANT ABOUT SHARING_ID:** This is only needed for our own accounts.. recla accounts has another type of sharing that gives direct access with no sharing id..
 
-- Get "sharing_id" for Pryv: 
+- Get "sharing_id" for Pryv:
 `curl -H "Authorization: ApiKey ${APIKEY}" https://api.gandi.net/v5/organization/organizations`
 
-RES: `48e7a100-3ed9-11e7-htzs-00163e6dc886`  
+RES: `48e7a100-3ed9-11e7-htzs-00163e6dc886`
 
 - (Check) list domains
 
 `curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains`
 
-or 
+or
 
 `curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains?sharing_id=48e7a100-3ed9-11e7-htzs-00163e6dc886"`
 
 
-- LIST Rec.la entries 
+- LIST Rec.la entries
 
 `curl -H "Authorization: ApiKey ${APIKEY}" "https://api.gandi.net/v5/livedns/domains/rec.la/records`
 
@@ -77,5 +78,3 @@ or
 or
 
 `curl -X PUT -H "Authorization: ApiKey ${APIKEY}" -H 'Content-Type: application/json' -d '{"rrset_ttl":300,"rrset_values":["\"pki\""]}' "https://api.gandi.net/v5/livedns/domains/rec.la/records/_acme-challenge/TXT?sharing_id=48e7a100-3ed9-11e7-htzs-00163e6dc886"`
-
- 

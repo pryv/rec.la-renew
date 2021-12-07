@@ -1,6 +1,7 @@
-# REC-LA Files
+# rec.la files
 
-Loopback domain and SSL certs. 
+Loopback domain and SSL certs.
+
 
 ## Why ?
 
@@ -8,21 +9,20 @@ At [Pryv](http://pryv.com) we often have to locally develop web applications tha
 
 This is why we refurbished a domain and its SSL certs to a full loopback domain.
 
-This will enable any developer to benefit from a loopback signed Certificate.
+This will enable any developer to benefit from a loopback signed certificate.
 
-#### See:
+#### See also:
 
-- [On Gihub](https://github.com/pryv/rec-la)
-- [On NPM](https://www.npmjs.com/package/rec-la)
+- [GitHub repository](https://github.com/pryv/rec.la)
+- [npm package](https://www.npmjs.com/package/rec.la)
 
-From here you can download rec-la SSL certificates.
 
-#### Files:
+## The files
 
-- [rec.la-cert.crt](rec.la-cert.crt) : The certificate  
-- [rec.la-key.pem](rec.la-key.pem) : The key  
-- [rec.la-ca.crt](rec.la-ca.crt) : Certificate of the authority  
-- [rec.la-bundle.crt](rec.la-bundle.crt) : Bundle of key + ca  
-- [pack.json](pack.json) : All this packed in a json file  
+- [rec.la-cert.crt](rec.la-cert.crt) : The certificate
+- [rec.la-key.pem](rec.la-key.pem) : The key
+- [rec.la-ca.crt](rec.la-ca.crt) : Certificate of the authority
+- [rec.la-bundle.crt](rec.la-bundle.crt) : Bundle of key + ca
+- [pack.json](pack.json) : All this packed in a json file
 
-This is provided by [Pryv](https://www.pryv.com) -  Data & Privacy Managed
+Provided by [Pryv](https://www.pryv.com) — Data & Privacy, Managed

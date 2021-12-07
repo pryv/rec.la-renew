@@ -1,7 +1,7 @@
 {
-  "name": "rec-la-renew",
-  "version": "1.0.0",
-  "description": "Rec-La Renewal tool",
+  "name": "rec.la-renew",
+  "version": "1.1.0",
+  "description": "rec.la certificate renewal tool",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
