@@ -7,18 +7,18 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [16.4.1]
 
     steps:
-    - name: Download master branch
-      uses: actions/checkout@v2
+    - name: Checkout master branch
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
 
     - name: Fetch dependencies
       run: yarn
@@ -26,32 +26,11 @@ jobs:
     - name: Generate new certificate
       run: IS_PRODUCTION=true GANDI_REC_LA_API_KEY=${{ secrets.GANDI_REC_LA_API_KEY }} yarn start
 
-    # there is one private package (lib-reporting) used as npm package, so we need 
-    # to authenticate
-    - name: Login to github
-      uses: webfactory/ssh-agent@v0.4.1
+    - name: Commit and push
+      uses: EndBug/add-and-commit@v9
       with:
-        ssh-private-key: ${{ secrets.TECH_PRYV_SSH_KEY }}
-    
-    - name: Commit and push to open Pryv and release docker tarball
-      uses: EndBug/add-and-commit@v4
-      with:
-        # The name of the user that will be displayed as the author of the commit
-        # Default: author of the commit that triggered the run
-        author_name: Pryvio
-        # The email of the user that will be displayed as the author of the commit
-        # Default: author of the commit that triggered the run
+        author_name: Pryv
         author_email: tech@pryv.com
         # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
-        # Default: false
         force: false
-        # The message for the commit
-        # Default: 'Commit from GitHub Actions'
         message: 'update cert'
-        # Name of the branch to use, if different from the one that triggered the workflow
-        # Default: the branch that triggered the workflow (from GITHUB_REF)
-        ref: 'master'
-      env:
-        # This is necessary in order to push a commit to the repo
-        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
-
