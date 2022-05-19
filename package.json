@@ -1,6 +1,6 @@
 {
   "name": "rec.la-renew",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "Renew and publish `*.rec.la` wildcard SSL certificate",
   "license": "BSD-3-Clause",
