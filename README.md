@@ -45,7 +45,7 @@ const [certificateKey, certificateRequest] = await acme.forge.createCsr({
 
 Currently, an account cert is generated for each request. This could be reviewed and a single account kept for all manipulations. [ACME-CLIENT](https://github.com/publishlab/node-acme-client) offers plenty of options to create a Let's Encrypt account; see the [ACME-CLIENT API](https://github.com/publishlab/node-acme-client/blob/master/docs/client.md).
 
-### Gandi API key
+### Gandi API key
 
 Get your own key from the security tab on gandi.net, then you can `set APIKEY=XXXXXXX`.
 
