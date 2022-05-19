@@ -21,10 +21,10 @@ jobs:
         node-version: '16'
 
     - name: Fetch dependencies
-      run: yarn
+      run: npm ci
 
     - name: Generate new certificate
-      run: IS_PRODUCTION=true GANDI_REC_LA_API_KEY=${{ secrets.GANDI_REC_LA_API_KEY }} yarn start
+      run: IS_PRODUCTION=true GANDI_REC_LA_API_KEY=${{ secrets.GANDI_REC_LA_API_KEY }} npm start
 
     - name: Commit and push
       uses: EndBug/add-and-commit@v9

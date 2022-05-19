@@ -1,16 +1,20 @@
 {
   "name": "rec.la-renew",
   "version": "1.1.0",
-  "description": "rec.la certificate renewal tool",
+  "private": true,
+  "description": "Renew and publish `*.rec.la` wildcard SSL certificate",
+  "license": "BSD-3-Clause",
+  "author": "Pryv S.A. <info@pryv.com>",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "semistandard"
   },
-  "author": "Pryv S.A. <info@pryv.com>",
-  "license": "BSD-3-Clause",
   "dependencies": {
     "acme-client": "^4.1.3",
     "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "semistandard": "^16.0.1"
   }
 }

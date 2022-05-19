@@ -20,24 +20,23 @@ const autoOpts = {
 
 (async () => {
   const client = new acme.Client({
-    directoryUrl: IS_PRODUCTION ? acme.directory.letsencrypt.production : acme.directory.letsencrypt.staging,  
+    directoryUrl: IS_PRODUCTION ? acme.directory.letsencrypt.production : acme.directory.letsencrypt.staging,
     accountKey: await acme.forge.createPrivateKey() // generate an account key each time
   });
 
   console.log('START');
   const certificate = await client.auto(autoOpts);
-  //const certificate = read(['docs', DOMAIN + '-bundle.crt']);
+  // const certificate = read(['docs', DOMAIN + '-bundle.crt']);
   savecert(DOMAIN, certificate);
   await pack(DOMAIN);
   console.log('DONE');
-})()
+})();
 
-async function challengeCreateFn(authz, challenge, keyAuthorization) {
+async function challengeCreateFn (authz, challenge, keyAuthorization) {
   console.log('****challengeCreateFn: ' + keyAuthorization);
   await gandi.update(DOMAIN, keyAuthorization);
 }
 
-async function challengeRemoveFn(authz, challenge, keyAuthorization) {
+async function challengeRemoveFn (authz, challenge, keyAuthorization) {
   console.log('****challengeRemoveFn');
 }
-
